@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_06_111459) do
+ActiveRecord::Schema.define(version: 2018_05_07_114100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_111459) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "parent_mood"
   end
 
   create_table "post_categories", force: :cascade do |t|
@@ -37,15 +38,25 @@ ActiveRecord::Schema.define(version: 2018_05_06_111459) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "category_id"
+    t.integer "views", default: 0
+    t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.string "name"
+    t.string "avatar"
+    t.integer "rating", default: 0
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "avatar"
-    t.integer "rating"
     t.string "role", default: "user"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -68,5 +79,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_111459) do
 
   add_foreign_key "post_categories", "categories"
   add_foreign_key "post_categories", "posts"
+  add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
+  add_foreign_key "profiles", "users"
 end

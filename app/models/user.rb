@@ -3,11 +3,8 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  name                   :string           default(""), not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
-#  avatar                 :string
-#  rating                 :integer
 #  role                   :string           default("user")
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
@@ -31,5 +28,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :confirmable
 
+  has_one :profile
   has_many :posts
+
+  validates :email, :encrypted_password, :role, presence: true
+  validates :email, uniqueness: true
+  validates :encrypted_password, length: {minimum: 6}
 end
