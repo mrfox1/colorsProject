@@ -28,10 +28,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :confirmable
 
+  before_create :build_profile_record
+
   has_one :profile
   has_many :posts
 
   validates :email, :encrypted_password, :role, presence: true
   validates :email, uniqueness: true
   validates :encrypted_password, length: {minimum: 6}
+
+  def build_profile_record
+    build_profile
+  end
 end
