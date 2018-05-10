@@ -11,6 +11,7 @@
 #  user_id     :integer
 #  category_id :integer
 #  views       :integer          default(0)
+#  rating      :integer          default(0)
 #
 
 require 'rails_helper'
