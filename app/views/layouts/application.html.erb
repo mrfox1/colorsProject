@@ -20,7 +20,7 @@
       <%= link_to profile_name, profile_path(current_user.id) %>
       <%= link_to 'Выйти', destroy_user_session_path, method: :delete %>
       <% if admin?%>
-        <%= link_to 'Создать категорию', new_category_path %>
+        <%= link_to 'Создать категорию', new_admin_category_path %>
       <% end%>
     <% end %>
     <%= yield %>

@@ -16,14 +16,18 @@
     <%= f.label 'Название поста' %>
     <%= f.text_field :title %>
   </div>
+
   <div class="field">
     <%= f.label 'Добавте картинку' %>
     <%= f.file_field :image %>
   </div>
+
   <div class="field">
     <%= f.label 'Текст поста' %>
     <%= f.text_area :text %>
   </div>
+
+  <%= select("post", "category_id", Category.all.collect {|p| [ p.name, p.id ] }) %>
 
   <div class="actions">
     <%= f.submit %>

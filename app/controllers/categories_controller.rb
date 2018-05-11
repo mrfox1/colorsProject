@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :require_user, only: :new
+  before_action :admin_user, only: [:new, :create]
 
   def index
     @categories = Category.all
@@ -14,12 +14,12 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    if @category.save
-      respond_to do |format|
-        format.html { redirect_to root_path, notice: 'Категория успешно создана' }
+    respond_to do |format|
+      if @category.save
+        format.html { redirect_to root_path, notice: 'Новая категория!' }
+      else
+        format.html { render :new }
       end
-    else
-      redirect_to :back
     end
   end
 
@@ -29,7 +29,7 @@ class CategoriesController < ApplicationController
     params.require(:category).permit(:name, :parent_mood)
   end
 
-  def require_user
+  def admin_user
     if current_user.present? && current_user.role == 'admin'
       true
     else

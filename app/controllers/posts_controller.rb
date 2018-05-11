@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :current_user?, only: [:new, :create]
+
   def index
     @posts = Post.all
   end
@@ -18,7 +20,6 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.category_id = 1
     respond_to do |format|
       if @post.save
        format.html { redirect_to @post, notice: 'Пост успешно создан! Уииии' }
@@ -39,6 +40,10 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :text, :image)
+    params.require(:post).permit(:title, :text, :image, :category_id)
+  end
+
+  def current_user?
+    redirect_to root_path unless current_user.present?
   end
 end

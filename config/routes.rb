@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :profile, only: :show
   resources :categories, only: [:index, :show]
 
-  scope :admin do
-    resources :categories, only: :new
+  scope :admin, as: 'admin' do
+    resources :categories, only: [:new, :create]
   end
 end
