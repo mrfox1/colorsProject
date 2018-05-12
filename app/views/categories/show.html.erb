@@ -1,2 +1,7 @@
-<h1>Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
+<h3>
+  <%= find_category %>
+</h3>
+<% @posts.each do |post| %>
+  <%= link_to post.title, post %>
+  <br/>
+<% end %>

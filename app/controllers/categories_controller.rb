@@ -1,11 +1,8 @@
 class CategoriesController < ApplicationController
   before_action :admin_user, only: [:new, :create]
 
-  def index
-    @categories = Category.all
-  end
-
   def show
+    @posts = Category.find(params[:id]).posts
   end
 
   def new
