@@ -1,5 +1,5 @@
 <h3>
-  <%= find_category %>
+  <%= @category.name %>
 </h3>
 <% @posts.each do |post| %>
   <%= link_to post.title, post %>

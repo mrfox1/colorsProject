@@ -1,8 +1,9 @@
 class CategoriesController < ApplicationController
   before_action :admin_user, only: [:new, :create]
+  before_action :set_posts, only: :show
+  before_action :set_category, only: :show
 
   def show
-    @posts = Category.find(params[:id]).posts
   end
 
   def new
@@ -32,5 +33,13 @@ class CategoriesController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+  def set_posts
+    @posts = Category.find(params[:id]).posts
+  end
+
+  def set_category
+    @category = Category.find(params[:id])
   end
 end
