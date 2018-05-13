@@ -7,22 +7,14 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
-
   <body>
+    <%= render 'layouts/menu' %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= link_to 'На главную', root_path %>
-    <% unless user_signed_in? %>
-      <%= link_to 'Регистрация', new_user_registration_path %>
-      <%= link_to 'Войти', new_user_session_path %>
-    <% else %>
-      <%= link_to profile_name, profile_path(current_user.id) %>
-      <%= link_to 'Выйти', destroy_user_session_path, method: :delete %>
-      <% if admin?%>
-        <%= link_to 'Создать категорию', new_admin_category_path %>
-      <% end%>
-    <% end %>
-    <%= yield %>
+    <div class="container ">
+      <%= yield %>
+    </div>
   </body>
 </html>
