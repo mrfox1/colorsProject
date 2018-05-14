@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :current_user?, only: [:new, :create]
-  before_action :set_post, only: [:show, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :author?, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -15,7 +16,6 @@ class PostsController < ApplicationController
   end
 
   def edit
-
   end
 
   def create
@@ -31,11 +31,27 @@ class PostsController < ApplicationController
   end
 
   def update
-
+    respond_to do |format|
+      if @post.update(post_params)
+        format.html { redirect_to @post, notice: 'Пост успешно обновлен' }
+        format.json { render :show, status: :ok, location: @post }
+      else
+        format.html { render :edit }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
-
+    respond_to do |format|
+      if @post.destroy
+        format.html { redirect_to root_path, notice: 'Пост успешно удален((' }
+        format.json { head :no_content }
+      else
+        format.html { render :show }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
@@ -50,5 +66,9 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def author?
+    redirect_to root_path unless @post.user == current_user
   end
 end

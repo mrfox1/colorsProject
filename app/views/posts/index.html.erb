@@ -7,4 +7,6 @@
   <h3>
     <%= link_to post.title, post %>
   </h3>
+  <%= link_to 'Редактировать', edit_post_path(post) if author(post) %>
+  <%= link_to 'Удалить', post, method: :delete, data: { confirm: 'Вы уверены?'} if author(post) %>
 <% end %>
