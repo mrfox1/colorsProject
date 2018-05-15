@@ -21,4 +21,6 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :title, length: {minimum: 5, maximum: 140}
   validates :text, length: {minimum: 10}
+
+  scope :newest, -> { order(:created_at).reverse }
 end
