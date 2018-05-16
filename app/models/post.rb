@@ -18,6 +18,9 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :category
 
+  has_many :post_tags
+  has_many :tags, through: :post_tags
+
   validates :title, presence: true
   validates :title, length: {minimum: 5, maximum: 140}
   validates :text, length: {minimum: 10}
