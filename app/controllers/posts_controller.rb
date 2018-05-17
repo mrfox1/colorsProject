@@ -22,6 +22,10 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    params[:post][:tags].split(',').each do |n|
+      print(n)
+      Tag.where(name: n.strip).first_or_create
+    end
     respond_to do |format|
       if @post.save
        format.html { redirect_to @post, notice: 'Пост успешно создан! Уииии' }

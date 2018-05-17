@@ -29,6 +29,11 @@
 
   <%= select("post", "category_id", Category.all.collect {|p| [ p.name, p.id ] }) %>
 
+  <div class="field">
+    <%= f.label "Tags (separated by commas)" %><br />
+    <%= f.text_field :tags %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
