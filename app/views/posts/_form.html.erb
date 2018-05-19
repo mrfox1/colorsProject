@@ -30,8 +30,7 @@
   <%= select("post", "category_id", Category.all.collect {|p| [ p.name, p.id ] }) %>
 
   <div class="field">
-    <%= f.label "Tags (separated by commas)" %><br />
-    <%= f.text_field :tags %>
+    <%= f.text_field :tags, placeholder: "Введите теги через запятую", value: nil %>
   </div>
 
   <div class="actions">
