@@ -1,0 +1,6 @@
+<h3>
+  <%= @tag.name %>
+</h3>
+<% @posts.each do |post| %>
+  <%= link_to post.title, post_path %>
+<% end %>

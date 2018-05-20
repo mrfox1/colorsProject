@@ -1,4 +1,4 @@
-module ProfileHelper
+module ProfilesHelper
   def profile_name
     if current_user.profile.name.present?
       current_user.profile.name

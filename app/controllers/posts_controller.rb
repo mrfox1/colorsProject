@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all.newest
     @categories = Category.all
+    @tags = Tag.all
   end
 
   def show
