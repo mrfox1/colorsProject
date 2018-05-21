@@ -1,2 +1,17 @@
-<h1>Profile#show</h1>
-<p>Find me in app/views/profile/show.html.erb</p>
+<h3>
+  <%= profile_name %>
+</h3>
+
+<div class="user_posts">
+  <h4>
+    Ваши посты
+  </h4>
+  <% @user.posts.each do |post| %>
+    <%= link_to post.title, post_path %>
+    <span>
+        <%= link_to (image_tag 'edit.png'), edit_post_path(post) if author(post) %>
+      <%= link_to (image_tag 'delete.png'), post, method: :delete, data: { confirm: 'Вы уверены?'} if author(post) %>
+      </span>
+    <br/>
+  <% end %>
+</div>

@@ -33,7 +33,7 @@ class User < ApplicationRecord
   before_save { self.email = email.downcase }
   before_create :build_profile_record
 
-  has_one :profile
+  has_one :profile, dependent: :destroy
   has_many :posts
 
   validates :encrypted_password, :role, presence: true
