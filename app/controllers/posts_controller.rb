@@ -21,13 +21,14 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
+    @post = current_user.posts.build(post_params)
     respond_to do |format|
       if @post.save
-       format.html { redirect_to @post, notice: 'Пост успешно создан! Уииии' }
+       flash.now[:success] = 'Пост успешно создан! Уииии'
+       format.html { redirect_to @post }
        Post.create_tags(params[:post][:tags], @post)
       else
+        flash.now[:danger] = 'Что-то пошло не так'
         format.html { render :new }
       end
     end
@@ -36,9 +37,11 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Пост успешно обновлен' }
+        flash.now[:success] = 'Пост успешно обновлен'
+        format.html { redirect_to @post }
         format.json { render :show, status: :ok, location: @post }
       else
+        flash.now[:danger] = 'Что-то пошло не так'
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -48,9 +51,11 @@ class PostsController < ApplicationController
   def destroy
     respond_to do |format|
       if @post.destroy
-        format.html { redirect_to root_path, notice: 'Пост успешно удален((' }
+        flash.now[:success] = 'Пост успешно удален(('
+        format.html { redirect_to root_path }
         format.json { head :no_content }
       else
+        flash.now[:danger] = 'Что-то пошло не так'
         format.html { render :show }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end

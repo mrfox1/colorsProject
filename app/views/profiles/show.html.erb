@@ -6,7 +6,7 @@
   <h4>
     Ваши посты
   </h4>
-  <% @user.posts.each do |post| %>
+  <% @user.posts.newest.each do |post| %>
     <%= link_to post.title, post_path %>
     <span>
         <%= link_to (image_tag 'edit.png'), edit_post_path(post) if author(post) %>
