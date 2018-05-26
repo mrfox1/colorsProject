@@ -1,6 +1,9 @@
 <h3>
   <%= @post.title %>
 </h3>
+<% if @post.tags.present? %>
+  <%= render partial: 'tags/tags', locals: { tags: @post.tags } %>
+<% end %>
 <h6>
   Рейтинг:
   <%= @post.rating %>

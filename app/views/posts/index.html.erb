@@ -5,7 +5,7 @@
 <h3>
   Выбор по тегу
 </h3>
-<%= render 'tags/tags' %>
+<%= render partial: 'tags/tags', locals: { tags: @tags} %>
 <%= link_to 'Создать пост', new_post_path if current_user %>
 <% @posts.each do |post| %>
   <div class="post col-xl-8 col-lg-8 col-md-10 col-sm-12" >
