@@ -26,6 +26,7 @@ class Post < ApplicationRecord
   validates :text, length: {minimum: 10}
 
   scope :newest, -> { order(:created_at).reverse }
+  scope :fresh, -> { where('created_at >= ? AND created_at <= ?', Date.today, Date.tomorrow) }
 
   def self.create_tags(params, post)
     params.split(',').each do |tag|

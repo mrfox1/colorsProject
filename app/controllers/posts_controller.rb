@@ -9,6 +9,10 @@ class PostsController < ApplicationController
     @tags = Tag.all
   end
 
+  def fresh
+    @posts = Post.all.fresh
+  end
+
   def show
     @post.increment!(:views)
   end
