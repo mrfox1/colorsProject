@@ -1,6 +1,4 @@
 <h3>
   <%= @tag.name %>
 </h3>
-<% @posts.each do |post| %>
-  <%= link_to post.title, post %>
-<% end %>
+<%= render @tag.posts.newest %>

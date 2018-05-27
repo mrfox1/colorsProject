@@ -1,0 +1,9 @@
+<div class="post col-xl-8 col-lg-8 col-md-10 col-sm-12" >
+  <h3>
+    <%= link_to post.title, post %>
+    <span>
+        <%= link_to (image_tag 'edit.png'), edit_post_path(post) if author(post) %>
+      <%= link_to (image_tag 'delete.png'), post, method: :delete, data: { confirm: 'Вы уверены?'} if author(post) %>
+      </span>
+  </h3>
+</div>
