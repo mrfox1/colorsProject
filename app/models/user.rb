@@ -34,7 +34,7 @@ class User < ApplicationRecord
   before_create :build_profile_record
 
   has_one :profile, dependent: :destroy
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   validates :encrypted_password, :role, presence: true
   validates :email, uniqueness: { case_sensitive: false }

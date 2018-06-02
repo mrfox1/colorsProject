@@ -1,0 +1,24 @@
+<%= form_for(user) do |f| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(user.errors.count, "error") %> prohibited this post from being saved:
+      </h2>
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Роль' %>
+  </div>
+
+  <%= select("user", "role", ['admin', 'moder', 'user']) %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

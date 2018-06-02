@@ -22,14 +22,6 @@ class Admin::CategoriesController < ApplicationController
     params.require(:category).permit(:name, :parent_mood)
   end
 
-  def admin_user
-    if current_user.present? && current_user.role == 'admin'
-      true
-    else
-      redirect_to root_path
-    end
-  end
-
   def set_category
     @category = Category.find(params[:id])
   end
