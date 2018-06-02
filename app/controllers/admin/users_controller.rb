@@ -13,7 +13,7 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         flash.now[:success] = 'Роль пользователя успешно обновлена'
-        format.html { redirect_to :index }
+        format.html { redirect_to admin_users_path }
       else
         flash.now[:danger] = 'Не вышло!'
         format.html { render :edit }

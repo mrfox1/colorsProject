@@ -1,6 +1,11 @@
 <h3>
   <%= profile_name %>
 </h3>
+<% if admin? %>
+  <%= link_to 'Создать категорию', new_admin_category_path %>
+  <br/>
+  <%= link_to 'Пользователи', admin_users_path %>
+<% end %>
 <div class="user_posts">
   <h4>
     Ваши посты

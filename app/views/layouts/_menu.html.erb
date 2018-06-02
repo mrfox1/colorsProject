@@ -13,12 +13,12 @@
         <%= link_to 'Новое', fresh_posts_path, class: 'nav-link' %>
       </li>
       <% unless user_signed_in? %>
-      <li class="nav-item">
-        <%= link_to 'Регистрация', new_user_registration_path, class: 'nav-link' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'Войти', new_user_session_path, class: 'nav-link' %>
-      </li>
+        <li class="nav-item">
+          <%= link_to 'Регистрация', new_user_registration_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Войти', new_user_session_path, class: 'nav-link' %>
+        </li>
       <% else %>
         <li class="nav-item">
           <%= link_to profile_name, profile_path(current_user.id), class: 'nav-link' %>
@@ -26,11 +26,6 @@
         <li class="nav-item">
           <%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'nav-link' %>
         </li>
-        <% if admin?%>
-          <li class="nav-item">
-            <%= link_to 'Создать категорию', new_admin_category_path, class: 'nav-link' %>
-          </li>
-        <% end%>
       <% end %>
     </ul>
   </div>

@@ -1,11 +1,11 @@
-<%= form_for(user) do |f| %>
-  <% if user.errors.any? %>
+<%= form_for(@user, url: admin_user_path(@user), method: :patch) do |f| %>
+  <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2>
-        <%= pluralize(user.errors.count, "error") %> prohibited this post from being saved:
+        <%= pluralize(@user.errors.count, "error") %> prohibited this post from being saved:
       </h2>
       <ul>
-        <% user.errors.full_messages.each do |message| %>
+        <% @user.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -13,7 +13,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label 'Роль' %>
+    <%= f.label 'Role' %>
   </div>
 
   <%= select("user", "role", ['admin', 'moder', 'user']) %>
